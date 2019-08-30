@@ -14,6 +14,9 @@ public class DatabaseShardingAlgorithm implements ComplexKeysShardingAlgorithm {
     public Collection<String> doSharding(Collection collection, ComplexKeysShardingValue complexKeysShardingValue) {
         Map<String, Collection> map = complexKeysShardingValue.getColumnNameAndShardingValuesMap();
         Collection valueCollection = map.get("id");
+        if (null == valueCollection || valueCollection.isEmpty() || 0 == valueCollection.size()) {
+            valueCollection = map.get("user_id");
+        }
         Object value = valueCollection.toArray()[0];
         int i = Integer.parseInt(value.toString()) % collection.size();
         List<String> list = new ArrayList<>();
