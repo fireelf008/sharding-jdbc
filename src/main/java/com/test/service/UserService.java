@@ -36,7 +36,7 @@ public class UserService {
         this.dicRepository.save(dic);
     }
 
-    @ShardingTransactionType(TransactionType.LOCAL)
+    @ShardingTransactionType(TransactionType.BASE)
     @Transactional
     public void save(User user) {
         this.userRepository.save(user);
